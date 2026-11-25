@@ -1,5 +1,0 @@
-EER obtido lendo SHOW CREATE TABLE das 11 tabelas implementadas no MySQL 8.0.46, na base temporaria recriar_ref_teste, porta 33179.
-Essa base foi criada pelo database.sql desta entrega, trocando apenas o nome do banco para testar sem alterar os cadastros da maquina.
-O desenho em PDF e SVG foi produzido a partir da estrutura lida do servidor. Nao e uma captura do Workbench e nao e um arquivo de modelo .mwb.
-PK, FK, tipos e nulabilidade foram extraidos dessa leitura. Os vinculos e suas cardinalidades foram conferidos com as 9 FKs e os indices UNIQUE.
-No Workbench tambem e possivel gerar outro EER usando Database > Reverse Engineer.
