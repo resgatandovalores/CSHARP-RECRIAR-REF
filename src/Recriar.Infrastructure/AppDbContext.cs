@@ -1,23 +1,24 @@
 using MySqlConnector;
 
-namespace Recriar.Infrastructure.Persistence.Context;
-
-public class AppDbContext
+namespace Recriar.Infrastructure.Persistence.Context
 {
-    private string _connectionString;
-
-    public AppDbContext(string connectionString)
+    public class AppDbContext
     {
-        _connectionString = connectionString;
-    }
+        private string _connectionString;
 
-    public MySqlConnection CreateWriteConnection()
-    {
-        return new MySqlConnection(_connectionString);
-    }
+        public AppDbContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
 
-    public MySqlConnection CreateReadConnection()
-    {
-        return new MySqlConnection(_connectionString);
+        public MySqlConnection CreateWriteConnection()
+        {
+            return new MySqlConnection(_connectionString);
+        }
+
+        public MySqlConnection CreateReadConnection()
+        {
+            return new MySqlConnection(_connectionString);
+        }
     }
 }

@@ -1,15 +1,16 @@
-namespace Recriar.Infrastructure.Persistence.Context;
-
-public class AppDbContextFactory
+namespace Recriar.Infrastructure.Persistence.Context
 {
-    public AppDbContext Create()
+    public class AppDbContextFactory
     {
-        string path = Path.Combine(AppContext.BaseDirectory, "conexao.txt");
-        if (!File.Exists(path))
+        public AppDbContext Create()
         {
-            throw new InvalidOperationException("Crie o arquivo conexao.txt ao lado do programa, seguindo conexao.exemplo.txt.");
+            string path = Path.Combine(AppContext.BaseDirectory, "conexao.txt");
+            if (!File.Exists(path))
+            {
+                throw new InvalidOperationException("Crie o arquivo conexao.txt ao lado do programa, seguindo conexao.exemplo.txt.");
+            }
+            string connectionString = File.ReadAllText(path).Trim();
+            return new AppDbContext(connectionString);
         }
-        string connectionString = File.ReadAllText(path).Trim();
-        return new AppDbContext(connectionString);
     }
 }

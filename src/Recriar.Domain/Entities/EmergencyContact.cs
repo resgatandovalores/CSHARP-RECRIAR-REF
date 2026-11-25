@@ -7,7 +7,7 @@ namespace Recriar.Domain.Entities
         private string _name;
         private string _phone;
         private int _childId;
-        private Child? _child;
+        private Child _child;
 
         // Inicializa os campos do cadastro.
         public EmergencyContact()
@@ -62,12 +62,12 @@ namespace Recriar.Domain.Entities
         }
 
 
-        public Child? getChild()
+        public Child getChild()
         {
             return _child;
         }
 
-        public void setChild(Child? value)
+        public void setChild(Child value)
         {
             _child = value;
         }

@@ -14,7 +14,7 @@ namespace Recriar.Application.Validators
             foreach (char character in text)
             {
 
-                if (!char.IsAsciiDigit(character))
+                if (character < '0' || character > '9')
                 {
                     return false;
                 }

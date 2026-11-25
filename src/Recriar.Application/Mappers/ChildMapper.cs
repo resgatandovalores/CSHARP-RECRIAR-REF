@@ -34,14 +34,14 @@ namespace Recriar.Application.Mappers
             child.setFileNumber(dto.getFileNumber());
             child.setAllergy(dto.getAllergy());
 
-            Guardian? guardian = child.getGuardian();
+            Guardian guardian = child.getGuardian();
             if (guardian == null) guardian = new Guardian();
             guardian.setName(dto.getGuardianName());
             guardian.setRg(dto.getGuardianRg());
             guardian.setCpf(dto.getGuardianCpf());
             child.setGuardian(guardian);
 
-            EmergencyContact? contact = child.getEmergencyContact();
+            EmergencyContact contact = child.getEmergencyContact();
             if (contact == null) contact = new EmergencyContact();
             contact.setName(dto.getEmergencyContactName());
             contact.setPhone(dto.getEmergencyContactPhone());
@@ -59,7 +59,7 @@ namespace Recriar.Application.Mappers
             foreach (FamilyMemberDto memberDto in members)
             {
 
-                FamilyMember? member = null;
+                FamilyMember member = null;
                 if (memberDto.getId() > 0)
                 {
                     foreach (FamilyMember existing in child.getFamilyMembers())
@@ -114,14 +114,14 @@ namespace Recriar.Application.Mappers
             result.setHealthCenter(child.getHealthCenter());
             result.setFileNumber(child.getFileNumber());
             result.setAllergy(child.getAllergy());
-            Guardian? guardian = child.getGuardian();
+            Guardian guardian = child.getGuardian();
             if (guardian != null)
             {
                 result.setGuardianName(guardian.getName());
                 result.setGuardianRg(guardian.getRg());
                 result.setGuardianCpf(guardian.getCpf());
             }
-            EmergencyContact? contact = child.getEmergencyContact();
+            EmergencyContact contact = child.getEmergencyContact();
             if (contact != null)
             {
                 result.setEmergencyContactName(contact.getName());
@@ -152,7 +152,7 @@ namespace Recriar.Application.Mappers
             return result;
         }
 
-        private string CleanRelationship(string? text)
+        private string CleanRelationship(string text)
         {
             if (text == null) return "";
             return text;

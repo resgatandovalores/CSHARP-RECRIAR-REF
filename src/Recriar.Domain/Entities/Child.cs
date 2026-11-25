@@ -19,8 +19,8 @@ namespace Recriar.Domain.Entities
         private string _healthCenter;
         private string _fileNumber;
         private string _allergy;
-        private Guardian? _guardian;
-        private EmergencyContact? _emergencyContact;
+        private Guardian _guardian;
+        private EmergencyContact _emergencyContact;
         private List<FamilyMember> _familyMembers;
 
         // Inicializa os campos do cadastro.
@@ -222,23 +222,23 @@ namespace Recriar.Domain.Entities
         }
 
 
-        public Guardian? getGuardian()
+        public Guardian getGuardian()
         {
             return _guardian;
         }
 
-        public void setGuardian(Guardian? value)
+        public void setGuardian(Guardian value)
         {
             _guardian = value;
         }
 
 
-        public EmergencyContact? getEmergencyContact()
+        public EmergencyContact getEmergencyContact()
         {
             return _emergencyContact;
         }
 
-        public void setEmergencyContact(EmergencyContact? value)
+        public void setEmergencyContact(EmergencyContact value)
         {
             _emergencyContact = value;
         }

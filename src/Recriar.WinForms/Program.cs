@@ -1,86 +1,62 @@
-using Recriar.Application.Exceptions;
+using System;
+using System.Threading;
+using System.Windows.Forms;
+using MySqlConnector;
 using Recriar.Application.Services;
-using Recriar.Infrastructure.Logging;
 using Recriar.Infrastructure.Export;
+using Recriar.Infrastructure.Logging;
 using Recriar.Infrastructure.Persistence.Context;
 using Recriar.Infrastructure.Persistence.Repositories;
 using Recriar.Domain.Entities;
 using Recriar.WinForms.Forms;
 
-namespace Recriar.WinForms;
-
-internal static class Program
+namespace Recriar.WinForms
 {
-    [STAThread]
-    private static void Main()
+    internal class Program
     {
-        ApplicationConfiguration.Initialize();
+        private static FileErrorLogger errorLogger;
 
-        FileErrorLogger errorLogger = new FileErrorLogger();
-        System.Windows.Forms.Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-        System.Windows.Forms.Application.ThreadException += (_, e) => ShowUnexpectedError(e.Exception, "Tela", errorLogger);
-
-        try
+        [STAThread]
+        private static void Main()
         {
-            ChildService service = CreateService(errorLogger);
-            using var mainForm = new MainForm(service, errorLogger);
-            System.Windows.Forms.Application.Run(mainForm);
-        }
-        catch (Exception ex)
-        {
-            ShowUnexpectedError(ex, "Abertura do programa", errorLogger);
-        }
-    }
-
-    private static ChildService CreateService(FileErrorLogger errorLogger)
-    {
-        AppDbContext context = new AppDbContextFactory().Create();
-
-        // Check the write connection before opening the main window.
-        using (var connection = context.CreateWriteConnection())
-        {
-            connection.Open();
-        }
-
-        ChildRepository children = new ChildRepository(context);
-        RelationshipTypeRepository relationshipTypes = new RelationshipTypeRepository(context);
-        DbActivityLogger activityLogger = new DbActivityLogger(context);
-
-        bool hasOther = false;
-        foreach (RelationshipType type in relationshipTypes.GetAll())
-        {
-            if (type.getId() == new RelationshipType().getOtherId() && type.getName() == "Outro")
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            errorLogger = new FileErrorLogger();
+            System.Windows.Forms.Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+            try
             {
-                hasOther = true;
+                AppDbContext context = new AppDbContextFactory().Create();
+                using (MySqlConnection connection = context.CreateWriteConnection())
+                {
+                    connection.Open();
+                }
+                ChildRepository children = new ChildRepository(context);
+                RelationshipTypeRepository types = new RelationshipTypeRepository(context);
+                bool found = false;
+                foreach (RelationshipType type in types.GetAll())
+                {
+                    if (type.getId() == 9 && type.getName() == "Outro") found = true;
+                }
+                if (!found) throw new ArgumentException("Confira os parentescos: Outro deve ter Id 9.");
+                DbActivityLogger activityLogger = new DbActivityLogger(context);
+                HtmlChildFileExporter exporter = new HtmlChildFileExporter();
+                ChildService service = new ChildService(children, types, activityLogger, errorLogger, exporter);
+                using (MainForm form = new MainForm(service, errorLogger))
+                {
+                    System.Windows.Forms.Application.Run(form);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorLogger.LogError(ex, "Abertura do programa");
+                MessageBox.Show("Não foi possível abrir o banco. Confira o MySQL e o arquivo conexao.txt.\n\n" + ex.Message, "Atenção");
             }
         }
-        if (!hasOther)
+
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            throw new InvalidOperationException("Confira a carga inicial de parentescos: Outro deve ter Id 9.");
+            errorLogger.LogError(e.Exception, "Tela");
+            MessageBox.Show("Ocorreu um erro ao usar a tela. Tente novamente.", "Atenção");
         }
-
-        return CreateChildService(children, relationshipTypes, activityLogger, errorLogger);
-    }
-
-    private static ChildService CreateChildService(
-        ChildRepository children,
-        RelationshipTypeRepository relationshipTypes,
-        DbActivityLogger activityLogger,
-        FileErrorLogger errorLogger)
-    {
-        return new ChildService(children, relationshipTypes, activityLogger, errorLogger,
-            new HtmlChildFileExporter());
-    }
-
-    private static void ShowUnexpectedError(Exception exception, string context, FileErrorLogger errorLogger)
-    {
-        errorLogger.LogError(exception, context);
-        string message = new ErrorHandler().GetMessage(exception);
-        if (context == "Abertura do programa")
-        {
-            message = "Não foi possível abrir o banco.\n\nConfira se o MySQL está ligado e se o arquivo conexao.txt está ao lado do programa.\n\n" + exception.Message;
-        }
-        MessageBox.Show(message, "Atenção",
-            MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 }

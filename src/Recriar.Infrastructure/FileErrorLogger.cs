@@ -1,30 +1,37 @@
+using System;
+using System.IO;
 
-namespace Recriar.Infrastructure.Logging;
-public class FileErrorLogger
+namespace Recriar.Infrastructure.Logging
 {
+    public class FileErrorLogger
+    {
+        private string folder;
 
-    private readonly string _folder;
-    public FileErrorLogger(string? folder = null)
-    {
-        _folder = folder ?? Path.Combine(AppContext.BaseDirectory, "logs");
-    }
-    public void LogError(Exception exception, string context)
-    {
-        try
+        public FileErrorLogger()
         {
-            Directory.CreateDirectory(_folder);
-
-            DateTime now = DateTime.Now;
-            string path = Path.Combine(_folder, $"errors-{now:yyyy-MM-dd}.log");
-            string text =
-                $"[{now:yyyy-MM-dd HH:mm:ss}] {context}{Environment.NewLine}" +
-                $"{exception}{Environment.NewLine}" +
-                $"{new string('-', 60)}{Environment.NewLine}";
-
-            File.AppendAllText(path, text);
+            folder = Path.Combine(AppContext.BaseDirectory, "logs");
         }
-        catch
+
+        public FileErrorLogger(string folder)
         {
+            if (folder == null) this.folder = Path.Combine(AppContext.BaseDirectory, "logs");
+            else this.folder = folder;
+        }
+
+        public void LogError(Exception exception, string context)
+        {
+            try
+            {
+                Directory.CreateDirectory(folder);
+                string path = Path.Combine(folder, "errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+                string text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " - " + context + Environment.NewLine;
+                text = text + exception.ToString() + Environment.NewLine + Environment.NewLine;
+                File.AppendAllText(path, text);
+            }
+            catch (Exception)
+            {
+                // Uma falha no arquivo de log nao deve esconder o erro original.
+            }
         }
     }
 }

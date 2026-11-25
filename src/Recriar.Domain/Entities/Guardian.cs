@@ -8,7 +8,7 @@ namespace Recriar.Domain.Entities
         private string _rg;
         private string _cpf;
         private int _childId;
-        private Child? _child;
+        private Child _child;
 
         // Inicializa os campos do cadastro.
         public Guardian()
@@ -75,12 +75,12 @@ namespace Recriar.Domain.Entities
         }
 
 
-        public Child? getChild()
+        public Child getChild()
         {
             return _child;
         }
 
-        public void setChild(Child? value)
+        public void setChild(Child value)
         {
             _child = value;
         }

@@ -91,3 +91,23 @@ O código de comunicação C#/MySQL segue o exemplo de integração enviado pelo
 A solução compilou com zero erros e zero avisos. Foram aprovadas 32 verificações de integração em uma base separada, incluindo cadastro, edição, familiares, exclusão, pesquisa, exportação, validações, FK, UNIQUE e CASCADE. Também foram conferidas a listagem, a abertura da ficha e a seleção de parentesco pelas telas. Isso não inclui teste de carga ou garantia de edição concorrente.
 
 No MySQL principal foram confirmadas 11 tabelas, 11 PKs, 9 FKs e 12 índices nomeados, com preservação dos cadastros anteriores. A reorganização das pastas não altera os dados do MySQL.
+
+## Estilo do C# conforme o material da turma
+
+A revisão considerou o simulado da Prova 02 de CMPLGP2 e os exemplos de ReservaHotal e WindowsFormsApp2 enviados pelo grupo.
+
+Foram mantidos campos privados, construtores, getters e setters, List<T>, foreach, for, if/else e tratamento de erros. Esses recursos aparecem nos materiais. A interpolação de strings também aparece no exemplo de ReservaHotal e foi mantida em mensagens existentes.
+
+Os botões agora chamam métodos com nome, como btnSalvar_Click e btnPesquisar_Click. O desenho das três telas fica nos arquivos Designer.cs, no mesmo formato de organização do exemplo WindowsFormsApp2. A lógica fica no arquivo principal de cada tela. A herança de Form e o método Dispose do Designer são parte do Windows Forms e aparecem no próprio exemplo enviado.
+
+Foram retirados lambdas, tuplas, desconstrução, var, new() sem o tipo, expressões de coleção, propriedades calculadas com =>, padrões is not/is {}, operadores ?? e ?., readonly e sealed. As referências nulas usam a escrita tradicional do material, como Aluno pesquisarAluno(...) retornando null quando não encontra.
+
+A integração usa classes comuns, SQL direto com parâmetros e MySqlConnection, MySqlCommand e MySqlDataReader. Não há ORM, interfaces próprias, LINQ, async/await ou transações. O bloco using fecha conexões e leitores mesmo quando ocorre um erro. DBNull.Value representa NULL no SQL. Esses dois pontos precisam ser entendidos para explicar a comunicação com o banco.
+
+O simulado e o ZIP não apresentam uma integração MySQL completa. O driver, os objetos de comando e leitura, a configuração da conexão e os arquivos de log/exportação são partes necessárias às funções deste projeto; não devem ser apresentados como se todos estivessem ensinados nesses dois exemplos. Os parâmetros seguem o modelo de MySqlCommand mostrado anteriormente pelo professor de BD.
+
+O SQL continua igual ao da versão instalada: 11 tabelas, sem views ou CHECKs. As instruções das telas continuam correspondendo a Banco/Consultas.sql. Sem transações, permanece a possibilidade de gravação parcial em caso de falha.
+
+Na revisão foram aprovadas as 32 verificações de integração e outras 17 verificações dos componentes/eventos, incluindo gravação pelo evento Salvar, pesquisa, edição de familiar, parentesco Outro, seleção após ordenar a grade e proteção dos caracteres HTML na exportação. As 17 verificações executam os componentes sem exibir diálogos; não representam um teste manual completo de todas as telas. A abertura da tela principal e do cadastro também foi observada. A automação manual completa foi interrompida por uma falha da ferramenta de controle da interface.
+
+A solução compilou com zero erros e zero avisos. Os testes usaram uma base separada na porta 33179. O banco principal na porta 3306 não foi modificado nesta revisão de C#.

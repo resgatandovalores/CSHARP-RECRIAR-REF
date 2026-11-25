@@ -2,36 +2,37 @@ using MySqlConnector;
 using Recriar.Domain.Entities;
 using Recriar.Infrastructure.Persistence.Context;
 
-namespace Recriar.Infrastructure.Persistence.Repositories;
-
-public class RelationshipTypeRepository
+namespace Recriar.Infrastructure.Persistence.Repositories
 {
-    private readonly AppDbContext _context;
-
-    public RelationshipTypeRepository(AppDbContext context)
+    public class RelationshipTypeRepository
     {
-        _context = context;
-    }
+        private AppDbContext _context;
 
-    public List<RelationshipType> GetAll()
-    {
-        List<RelationshipType> types = new List<RelationshipType>();
-        using (MySqlConnection connection = _context.CreateReadConnection())
+        public RelationshipTypeRepository(AppDbContext context)
         {
-            connection.Open();
-            string sql = "SELECT Id, Name FROM RelationshipTypes ORDER BY Id";
-            using (MySqlCommand command = new MySqlCommand(sql, connection))
-            using (MySqlDataReader reader = command.ExecuteReader())
+            _context = context;
+        }
+
+        public List<RelationshipType> GetAll()
+        {
+            List<RelationshipType> types = new List<RelationshipType>();
+            using (MySqlConnection connection = _context.CreateReadConnection())
             {
-                while (reader.Read())
+                connection.Open();
+                string sql = "SELECT Id, Name FROM RelationshipTypes ORDER BY Id";
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    RelationshipType type = new RelationshipType();
-                    type.setId(reader.GetInt32("Id"));
-                    type.setName(reader.GetString("Name"));
-                    types.Add(type);
+                    while (reader.Read())
+                    {
+                        RelationshipType type = new RelationshipType();
+                        type.setId(reader.GetInt32("Id"));
+                        type.setName(reader.GetString("Name"));
+                        types.Add(type);
+                    }
                 }
             }
+            return types;
         }
-        return types;
     }
 }
