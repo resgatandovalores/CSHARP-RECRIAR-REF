@@ -1,0 +1,25 @@
+Instalacao no MySQL principal - 25/11/2026
+
+Servidor: localhost, porta 3306.
+Banco do projeto: recriar_prod.
+Estrutura confirmada: 11 tabelas, 11 PKs, 9 FKs e 12 indices nomeados IX_.
+O banco recriar_prod nao possui views nem CHECKs.
+
+Antes da alteracao, as 11 tabelas antigas foram preservadas integralmente no
+schema recriar_backup_20261125. Os dados foram copiados para a estrutura nova.
+Os 2 cadastros de criancas, seus 2 responsaveis, 2 contatos e 2 familiares
+continuam no banco principal, com os mesmos IDs.
+O instalador acrescentou 1 cadastro ficticio completo e dados de oficinas.
+Contagem apos atualizar: 3 criancas, 3 responsaveis, 3 contatos e 3 familiares.
+
+As operacoes locais e o arquivo de verificacao estao em:
+Documentos/Backups_RECRIAR/2026-11-25
+Nao repita o arquivo de atualizacao, pois essa etapa ja foi aplicada.
+
+O database.sql da entrega continua sendo um instalador para base vazia.
+Ele foi deixado aberto no Workbench para leitura; nao deve ser executado
+novamente sobre o banco que agora ja esta instalado.
+
+Os schemas antigos de leitura e os backups de outras versoes foram mantidos.
+Eles nao sao utilizados pelo projeto simplificado, que usa apenas recriar_prod.
+Nao foram criados usuarios ou alteradas senhas nesta atualizacao.

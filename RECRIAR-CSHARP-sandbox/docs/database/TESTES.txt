@@ -42,4 +42,5 @@ Nao ha teste de carga nem garantia de edicao concorrente.
 Nao ha transacoes: gravacoes em varias tabelas podem ficar incompletas se
 ocorrer uma falha durante a operacao. Nao foi alegado rollback nesta versao.
 
-O MySQL principal da maquina, na porta 3306, nao foi alterado.
+Apos autorizacao, a instalacao tambem foi aplicada e conferida no MySQL principal,
+porta 3306, com backup e preservacao dos cadastros. Veja INSTALACAO_LOCAL.txt.

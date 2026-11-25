@@ -8,7 +8,7 @@ Esta versão usa um banco MySQL, chamado `recriar_prod`, com 11 tabelas. A leitu
 2. Abra `database.sql` e execute o arquivo inteiro. Ele cria as tabelas, os índices, os parentescos, os dados fictícios e executa as consultas de demonstração.
 3. Confira se o banco `recriar_prod` apareceu na lista de schemas.
 
-O instalador é para uma base vazia. Se `recriar_prod` já existir, não execute por cima dele. Ele não apaga nem converte bancos antigos. Nesta entrega, o banco anterior da máquina foi preservado; os testes foram feitos em outro servidor local.
+O instalador é para uma base vazia. Se `recriar_prod` já existir, não execute por cima dele. Ele não apaga nem converte bancos antigos. Após autorização do Leandro, a estrutura simplificada foi aplicada ao MySQL principal, na porta 3306. As tabelas antigas ficaram em recriar_backup_20261125 e os cadastros foram preservados. Veja INSTALACAO_LOCAL.txt. Os testes de integração continuam tendo sido realizados em servidor separado.
 
 Também é possível executar `01_estrutura.sql`, `02_dados.sql` e `03_consultas_interfaces.sql`, nessa ordem. Escolha essa opção ou o arquivo completo, para não repetir a instalação.
 
