@@ -2,25 +2,22 @@ using MySqlConnector;
 
 namespace Recriar.Infrastructure.Persistence.Context;
 
-// Stores the settings used to open the two connections.
 public class AppDbContext
 {
-    private readonly string _writeConnectionString;
-    private readonly string _readConnectionString;
+    private string _connectionString;
 
-    public AppDbContext(string writeConnectionString, string readConnectionString)
+    public AppDbContext(string connectionString)
     {
-        _writeConnectionString = writeConnectionString;
-        _readConnectionString = readConnectionString;
+        _connectionString = connectionString;
     }
 
     public MySqlConnection CreateWriteConnection()
     {
-        return new MySqlConnection(_writeConnectionString);
+        return new MySqlConnection(_connectionString);
     }
 
     public MySqlConnection CreateReadConnection()
     {
-        return new MySqlConnection(_readConnectionString);
+        return new MySqlConnection(_connectionString);
     }
 }

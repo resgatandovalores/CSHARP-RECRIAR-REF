@@ -1,14 +1,15 @@
 using System.Diagnostics;
 using Recriar.Application.Dtos;
 using Recriar.Application.Exceptions;
-using Recriar.Application.Interfaces;
+using Recriar.Application.Services;
+using Recriar.Infrastructure.Logging;
 
 namespace Recriar.WinForms.Forms;
 
 internal sealed class MainForm : Form
 {
-    private readonly IChildService _service;
-    private readonly IErrorLogger _errorLogger;
+    private readonly ChildService _service;
+    private readonly FileErrorLogger _errorLogger;
     private readonly TextBox _search = new() { Width = 260, PlaceholderText = "Digite parte do nome" };
     private readonly Label _status = new() { AutoSize = true };
     private readonly Button _edit = new() { Text = "Editar ficha", AutoSize = true };
@@ -27,7 +28,7 @@ internal sealed class MainForm : Form
         SelectionMode = DataGridViewSelectionMode.FullRowSelect
     };
 
-    internal MainForm(IChildService service, IErrorLogger errorLogger)
+    internal MainForm(ChildService service, FileErrorLogger errorLogger)
     {
         _service = service;
         _errorLogger = errorLogger;
@@ -49,10 +50,10 @@ internal sealed class MainForm : Form
         actions.Controls.AddRange([newButton, _edit, _export, _delete]);
 
         _children.Columns.AddRange(
-            Column("Ficha", nameof(ChildSummaryDto.Id), 15),
-            Column("Nome da criança", nameof(ChildSummaryDto.Name), 45),
-            Column("CPF", nameof(ChildSummaryDto.Cpf), 20),
-            Column("Telefone", nameof(ChildSummaryDto.Phone), 20));
+            Column("Ficha", "Id", 15),
+            Column("Nome da criança", "Name", 45),
+            Column("CPF", "Cpf", 20),
+            Column("Telefone", "Phone", 20));
 
         var layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, Padding = new Padding(16) };
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -96,7 +97,7 @@ internal sealed class MainForm : Form
 
     private ChildSummaryDto? SelectedChild =>
         _children.SelectedRows.Count == 1
-            ? _children.SelectedRows[0].DataBoundItem as ChildSummaryDto
+            ? _children.SelectedRows[0].Tag as ChildSummaryDto
             : null;
 
     private void LoadChildren(string? search = null)
@@ -104,7 +105,12 @@ internal sealed class MainForm : Form
         try
         {
             var rows = search is null ? _service.GetAll() : _service.SearchByName(search);
-            _children.DataSource = rows;
+            _children.Rows.Clear();
+            foreach (ChildSummaryDto item in rows)
+            {
+                int index = _children.Rows.Add(item.getId(), item.getName(), item.getCpf(), item.getPhone());
+                _children.Rows[index].Tag = item;
+            }
             _children.ClearSelection();
             _status.Text = rows.Count == 0
                 ? "Nenhum cadastro encontrado."
@@ -112,7 +118,7 @@ internal sealed class MainForm : Form
         }
         catch (Exception ex)
         {
-            _children.DataSource = null;
+            _children.Rows.Clear();
             _status.Text = string.Empty;
             ShowError(ex);
         }
@@ -139,7 +145,7 @@ internal sealed class MainForm : Form
     private void EditSelectedChild()
     {
         if (SelectedChild is { } child)
-            OpenChild(child.Id);
+            OpenChild(child.getId());
     }
 
     private void DeleteSelectedChild()
@@ -147,14 +153,14 @@ internal sealed class MainForm : Form
         if (SelectedChild is not { } child)
             return;
 
-        var answer = MessageBox.Show(this, $"Excluir a ficha {child.Id} de {child.Name}?",
+        var answer = MessageBox.Show(this, $"Excluir a ficha {child.getId()} de {child.getName()}?",
             "Confirmar exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
         if (answer != DialogResult.Yes)
             return;
 
         try
         {
-            _service.Delete(child.Id);
+            _service.Delete(child.getId());
             LoadChildren(_search.Text);
         }
         catch (Exception ex)
@@ -171,7 +177,7 @@ internal sealed class MainForm : Form
         string path;
         try
         {
-            path = _service.ExportFile(child.Id);
+            path = _service.ExportFile(child.getId());
         }
         catch (Exception ex)
         {
@@ -201,7 +207,7 @@ internal sealed class MainForm : Form
     }
 
     private void ShowError(Exception exception) =>
-        MessageBox.Show(this, ErrorHandler.GetMessage(exception), "Atenção",
+        MessageBox.Show(this, new ErrorHandler().GetMessage(exception), "Atenção",
             MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
     private static DataGridViewTextBoxColumn Column(string label, string property, float weight) => new()

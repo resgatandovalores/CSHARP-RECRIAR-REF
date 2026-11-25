@@ -34,14 +34,18 @@ namespace Recriar.Application.Mappers
             child.setFileNumber(dto.getFileNumber());
             child.setAllergy(dto.getAllergy());
 
-            if (child.getGuardian() == null) child.setGuardian(new Guardian());
-            child.getGuardian().getsetName()(dto.getGuardianName());
-            child.getGuardian().getsetRg()(dto.getGuardianRg());
-            child.getGuardian().getsetCpf()(dto.getGuardianCpf());
+            Guardian? guardian = child.getGuardian();
+            if (guardian == null) guardian = new Guardian();
+            guardian.setName(dto.getGuardianName());
+            guardian.setRg(dto.getGuardianRg());
+            guardian.setCpf(dto.getGuardianCpf());
+            child.setGuardian(guardian);
 
-            if (child.getEmergencyContact() == null) child.setEmergencyContact(new EmergencyContact());
-            child.getEmergencyContact().getsetName()(dto.getEmergencyContactName());
-            child.getEmergencyContact().getsetPhone()(dto.getEmergencyContactPhone());
+            EmergencyContact? contact = child.getEmergencyContact();
+            if (contact == null) contact = new EmergencyContact();
+            contact.setName(dto.getEmergencyContactName());
+            contact.setPhone(dto.getEmergencyContactPhone());
+            child.setEmergencyContact(contact);
 
             ApplyFamilyMembers(child, dto.getFamilyMembers());
         }
@@ -55,7 +59,7 @@ namespace Recriar.Application.Mappers
             foreach (FamilyMemberDto memberDto in members)
             {
 
-                FamilyMember member = null;
+                FamilyMember? member = null;
                 if (memberDto.getId() > 0)
                 {
                     foreach (FamilyMember existing in child.getFamilyMembers())
@@ -110,16 +114,18 @@ namespace Recriar.Application.Mappers
             result.setHealthCenter(child.getHealthCenter());
             result.setFileNumber(child.getFileNumber());
             result.setAllergy(child.getAllergy());
-            if (child.getGuardian() != null)
+            Guardian? guardian = child.getGuardian();
+            if (guardian != null)
             {
-                result.setGuardianName(child.getGuardian().getName());
-                result.setGuardianRg(child.getGuardian().getRg());
-                result.setGuardianCpf(child.getGuardian().getCpf());
+                result.setGuardianName(guardian.getName());
+                result.setGuardianRg(guardian.getRg());
+                result.setGuardianCpf(guardian.getCpf());
             }
-            if (child.getEmergencyContact() != null)
+            EmergencyContact? contact = child.getEmergencyContact();
+            if (contact != null)
             {
-                result.setEmergencyContactName(child.getEmergencyContact().getName());
-                result.setEmergencyContactPhone(child.getEmergencyContact().getPhone());
+                result.setEmergencyContactName(contact.getName());
+                result.setEmergencyContactPhone(contact.getPhone());
             }
             foreach (FamilyMember member in child.getFamilyMembers()) result.getFamilyMembers().Add(ToDto(member));
             return result;
@@ -146,7 +152,7 @@ namespace Recriar.Application.Mappers
             return result;
         }
 
-        private string CleanRelationship(string text)
+        private string CleanRelationship(string? text)
         {
             if (text == null) return "";
             return text;

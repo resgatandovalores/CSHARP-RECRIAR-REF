@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\Recriar.Application\Recriar.Application.csproj" />
@@ -13,4 +13,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="conexao.exemplo.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="conexao.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="../../src/Recriar.Application/Recriar.Application.csproj" />
     <ProjectReference Include="../../src/Recriar.Infrastructure/Recriar.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,10 @@
 using MySqlConnector;
-using Recriar.Application.Interfaces;
 using Recriar.Domain.Entities;
 using Recriar.Infrastructure.Persistence.Context;
 
 namespace Recriar.Infrastructure.Persistence.Repositories;
 
-public class ChildRepository : IChildRepository
+public class ChildRepository
 {
     private readonly AppDbContext _context;
 
@@ -16,33 +15,28 @@ public class ChildRepository : IChildRepository
 
     public Child? GetById(int id)
     {
+        Child? child = null;
         using (MySqlConnection connection = _context.CreateReadConnection())
         {
             connection.Open();
-            // All queries see the same version of this registration.
-            using (MySqlTransaction transaction = connection.BeginTransaction(System.Data.IsolationLevel.RepeatableRead))
+            string sql = "SELECT * FROM Children WHERE Id = @id";
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
-                Child? child = null;
-                string sql = "SELECT * FROM Children WHERE Id = @id";
-                using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
+                command.Parameters.AddWithValue("@id", id);
+                using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    command.Parameters.AddWithValue("@id", id);
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    if (reader.Read())
                     {
-                        if (reader.Read())
-                        {
-                            child = ReadChild(reader);
-                        }
+                        child = ReadChild(reader);
                     }
                 }
-                if (child != null)
-                {
-                    LoadRelatedData(child, connection, transaction);
-                }
-                transaction.Commit();
-                return child;
+            }
+            if (child != null)
+            {
+                LoadRelatedData(child, connection);
             }
         }
+        return child;
     }
 
     public List<Child> GetAll()
@@ -64,24 +58,24 @@ public class ChildRepository : IChildRepository
             string sql = "SELECT Id, Name, Cpf, Phone FROM Children";
             if (name != null)
             {
-                sql = sql + " WHERE LOCATE(@name, Name) > 0";
+                sql = sql + " WHERE Name LIKE @name";
             }
             sql = sql + " ORDER BY Id";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
                 if (name != null)
                 {
-                    command.Parameters.AddWithValue("@name", name);
+                    command.Parameters.AddWithValue("@name", "%" + name + "%");
                 }
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         Child child = new Child();
-                        child.Id = reader.GetInt32("Id");
-                        child.Name = reader.GetString("Name");
-                        child.Cpf = reader.GetString("Cpf");
-                        child.Phone = reader.GetString("Phone");
+                        child.setId(reader.GetInt32("Id"));
+                        child.setName(reader.GetString("Name"));
+                        child.setCpf(reader.GetString("Cpf"));
+                        child.setPhone(reader.GetString("Phone"));
                         children.Add(child);
                     }
                 }
@@ -96,22 +90,18 @@ public class ChildRepository : IChildRepository
         using (MySqlConnection connection = _context.CreateWriteConnection())
         {
             connection.Open();
-            using (MySqlTransaction transaction = connection.BeginTransaction())
+            string sql = "INSERT INTO Children (Name, Age, Cpf, Rg, Address, Neighborhood, City, School, MotherName, FatherName, Phone, RegistrationDate, HealthCenter, FileNumber, Allergy) VALUES (@Name, @Age, @Cpf, @Rg, @Address, @Neighborhood, @City, @School, @MotherName, @FatherName, @Phone, @RegistrationDate, @HealthCenter, @FileNumber, @Allergy)";
+            int id;
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
-                string sql = "INSERT INTO Children (Name, Age, Cpf, Rg, Address, Neighborhood, City, School, MotherName, FatherName, Phone, RegistrationDate, HealthCenter, FileNumber, Allergy) VALUES (@Name, @Age, @Cpf, @Rg, @Address, @Neighborhood, @City, @School, @MotherName, @FatherName, @Phone, @RegistrationDate, @HealthCenter, @FileNumber, @Allergy)";
-                int id;
-                using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
-                {
-                    AddChildParameters(command, child);
-                    command.ExecuteNonQuery();
-                    id = GetNewId(connection, transaction);
-                }
-                int guardianId = SaveGuardian(child.Guardian!, id, connection, transaction);
-                int contactId = SaveEmergencyContact(child.EmergencyContact!, id, connection, transaction);
-                List<int> familyIds = SaveFamilyMembers(child, id, connection, transaction, false);
-                transaction.Commit();
-                ApplyIds(child, id, guardianId, contactId, familyIds);
+                AddChildParameters(command, child);
+                command.ExecuteNonQuery();
+                id = GetNewId(connection);
             }
+            int guardianId = SaveGuardian(child.getGuardian()!, id, connection);
+            int contactId = SaveEmergencyContact(child.getEmergencyContact()!, id, connection);
+            List<int> familyIds = SaveFamilyMembers(child, id, connection, false);
+            ApplyIds(child, id, guardianId, contactId, familyIds);
         }
     }
 
@@ -121,30 +111,25 @@ public class ChildRepository : IChildRepository
         using (MySqlConnection connection = _context.CreateWriteConnection())
         {
             connection.Open();
-            using (MySqlTransaction transaction = connection.BeginTransaction())
+            using (MySqlCommand find = new MySqlCommand("SELECT Id FROM Children WHERE Id = @id", connection))
             {
-                // Lock the registration while its related records are being changed.
-                using (MySqlCommand find = new MySqlCommand("SELECT Id FROM Children WHERE Id = @id FOR UPDATE", connection, transaction))
+                find.Parameters.AddWithValue("@id", child.getId());
+                if (find.ExecuteScalar() == null)
                 {
-                    find.Parameters.AddWithValue("@id", child.Id);
-                    if (find.ExecuteScalar() == null)
-                    {
-                        throw new InvalidOperationException("Cadastro não encontrado para edição.");
-                    }
+                    throw new InvalidOperationException("Cadastro não encontrado para edição.");
                 }
-                string sql = "UPDATE Children SET Name = @Name, Age = @Age, Cpf = @Cpf, Rg = @Rg, Address = @Address, Neighborhood = @Neighborhood, City = @City, School = @School, MotherName = @MotherName, FatherName = @FatherName, Phone = @Phone, RegistrationDate = @RegistrationDate, HealthCenter = @HealthCenter, FileNumber = @FileNumber, Allergy = @Allergy WHERE Id = @id";
-                using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
-                {
-                    AddChildParameters(command, child);
-                    command.Parameters.AddWithValue("@id", child.Id);
-                    command.ExecuteNonQuery();
-                }
-                int guardianId = SaveGuardian(child.Guardian!, child.Id, connection, transaction);
-                int contactId = SaveEmergencyContact(child.EmergencyContact!, child.Id, connection, transaction);
-                List<int> familyIds = SaveFamilyMembers(child, child.Id, connection, transaction, true);
-                transaction.Commit();
-                ApplyIds(child, child.Id, guardianId, contactId, familyIds);
             }
+            string sql = "UPDATE Children SET Name = @Name, Age = @Age, Cpf = @Cpf, Rg = @Rg, Address = @Address, Neighborhood = @Neighborhood, City = @City, School = @School, MotherName = @MotherName, FatherName = @FatherName, Phone = @Phone, RegistrationDate = @RegistrationDate, HealthCenter = @HealthCenter, FileNumber = @FileNumber, Allergy = @Allergy WHERE Id = @id";
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
+            {
+                AddChildParameters(command, child);
+                command.Parameters.AddWithValue("@id", child.getId());
+                command.ExecuteNonQuery();
+            }
+            int guardianId = SaveGuardian(child.getGuardian()!, child.getId(), connection);
+            int contactId = SaveEmergencyContact(child.getEmergencyContact()!, child.getId(), connection);
+            List<int> familyIds = SaveFamilyMembers(child, child.getId(), connection, true);
+            ApplyIds(child, child.getId(), guardianId, contactId, familyIds);
         }
     }
 
@@ -165,122 +150,122 @@ public class ChildRepository : IChildRepository
     private static Child ReadChild(MySqlDataReader reader)
     {
         Child child = new Child();
-        child.Id = reader.GetInt32("Id");
-        child.Name = reader.GetString("Name");
-        child.Age = reader.GetInt32("Age");
-        child.Cpf = reader.GetString("Cpf");
-        child.Rg = reader.GetString("Rg");
-        child.Address = reader.GetString("Address");
-        child.Neighborhood = reader.GetString("Neighborhood");
-        child.City = reader.GetString("City");
-        child.School = reader.GetString("School");
-        child.MotherName = reader.GetString("MotherName");
-        child.FatherName = reader.GetString("FatherName");
-        child.Phone = reader.GetString("Phone");
-        child.RegistrationDate = reader.GetDateTime("RegistrationDate");
-        child.HealthCenter = reader.GetString("HealthCenter");
-        child.FileNumber = reader.GetString("FileNumber");
-        child.Allergy = reader.GetString("Allergy");
+        child.setId(reader.GetInt32("Id"));
+        child.setName(reader.GetString("Name"));
+        child.setAge(reader.GetInt32("Age"));
+        child.setCpf(reader.GetString("Cpf"));
+        child.setRg(reader.GetString("Rg"));
+        child.setAddress(reader.GetString("Address"));
+        child.setNeighborhood(reader.GetString("Neighborhood"));
+        child.setCity(reader.GetString("City"));
+        child.setSchool(reader.GetString("School"));
+        child.setMotherName(reader.GetString("MotherName"));
+        child.setFatherName(reader.GetString("FatherName"));
+        child.setPhone(reader.GetString("Phone"));
+        child.setRegistrationDate(reader.GetDateTime("RegistrationDate"));
+        child.setHealthCenter(reader.GetString("HealthCenter"));
+        child.setFileNumber(reader.GetString("FileNumber"));
+        child.setAllergy(reader.GetString("Allergy"));
         return child;
     }
 
     private static void AddChildParameters(MySqlCommand command, Child child)
     {
-        command.Parameters.AddWithValue("@Name", child.Name);
-        command.Parameters.AddWithValue("@Age", child.Age);
-        command.Parameters.AddWithValue("@Cpf", child.Cpf);
-        command.Parameters.AddWithValue("@Rg", child.Rg);
-        command.Parameters.AddWithValue("@Address", child.Address);
-        command.Parameters.AddWithValue("@Neighborhood", child.Neighborhood);
-        command.Parameters.AddWithValue("@City", child.City);
-        command.Parameters.AddWithValue("@School", child.School);
-        command.Parameters.AddWithValue("@MotherName", child.MotherName);
-        command.Parameters.AddWithValue("@FatherName", child.FatherName);
-        command.Parameters.AddWithValue("@Phone", child.Phone);
-        command.Parameters.AddWithValue("@RegistrationDate", child.RegistrationDate.Date);
-        command.Parameters.AddWithValue("@HealthCenter", child.HealthCenter);
-        command.Parameters.AddWithValue("@FileNumber", child.FileNumber);
-        command.Parameters.AddWithValue("@Allergy", child.Allergy);
+        command.Parameters.AddWithValue("@Name", child.getName());
+        command.Parameters.AddWithValue("@Age", child.getAge());
+        command.Parameters.AddWithValue("@Cpf", child.getCpf());
+        command.Parameters.AddWithValue("@Rg", child.getRg());
+        command.Parameters.AddWithValue("@Address", child.getAddress());
+        command.Parameters.AddWithValue("@Neighborhood", child.getNeighborhood());
+        command.Parameters.AddWithValue("@City", child.getCity());
+        command.Parameters.AddWithValue("@School", child.getSchool());
+        command.Parameters.AddWithValue("@MotherName", child.getMotherName());
+        command.Parameters.AddWithValue("@FatherName", child.getFatherName());
+        command.Parameters.AddWithValue("@Phone", child.getPhone());
+        command.Parameters.AddWithValue("@RegistrationDate", child.getRegistrationDate().Date);
+        command.Parameters.AddWithValue("@HealthCenter", child.getHealthCenter());
+        command.Parameters.AddWithValue("@FileNumber", child.getFileNumber());
+        command.Parameters.AddWithValue("@Allergy", child.getAllergy());
     }
 
-    private static void LoadRelatedData(Child child, MySqlConnection connection, MySqlTransaction transaction)
+    private static void LoadRelatedData(Child child, MySqlConnection connection)
     {
-        using (MySqlCommand command = new MySqlCommand("SELECT * FROM Guardians WHERE ChildId = @id", connection, transaction))
+        using (MySqlCommand command = new MySqlCommand("SELECT * FROM Guardians WHERE ChildId = @id", connection))
         {
-            command.Parameters.AddWithValue("@id", child.Id);
+            command.Parameters.AddWithValue("@id", child.getId());
             using (MySqlDataReader reader = command.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     Guardian guardian = new Guardian();
-                    guardian.Id = reader.GetInt32("Id");
-                    guardian.ChildId = child.Id;
-                    guardian.Child = child;
-                    guardian.Name = reader.GetString("Name");
-                    guardian.Cpf = reader.GetString("Cpf");
-                    guardian.Rg = reader.GetString("Rg");
-                    child.Guardian = guardian;
+                    guardian.setId(reader.GetInt32("Id"));
+                    guardian.setChildId(child.getId());
+                    guardian.setChild(child);
+                    guardian.setName(reader.GetString("Name"));
+                    guardian.setCpf(reader.GetString("Cpf"));
+                    guardian.setRg(reader.GetString("Rg"));
+                    child.setGuardian(guardian);
                 }
             }
         }
-        using (MySqlCommand command = new MySqlCommand("SELECT * FROM EmergencyContacts WHERE ChildId = @id", connection, transaction))
+        using (MySqlCommand command = new MySqlCommand("SELECT * FROM EmergencyContacts WHERE ChildId = @id", connection))
         {
-            command.Parameters.AddWithValue("@id", child.Id);
+            command.Parameters.AddWithValue("@id", child.getId());
             using (MySqlDataReader reader = command.ExecuteReader())
             {
                 if (reader.Read())
                 {
                     EmergencyContact contact = new EmergencyContact();
-                    contact.Id = reader.GetInt32("Id");
-                    contact.ChildId = child.Id;
-                    contact.Child = child;
-                    contact.Name = reader.GetString("Name");
-                    contact.Phone = reader.GetString("Phone");
-                    child.EmergencyContact = contact;
+                    contact.setId(reader.GetInt32("Id"));
+                    contact.setChildId(child.getId());
+                    contact.setChild(child);
+                    contact.setName(reader.GetString("Name"));
+                    contact.setPhone(reader.GetString("Phone"));
+                    child.setEmergencyContact(contact);
                 }
             }
         }
         string sql = "SELECT f.*, r.Name AS RelationshipName FROM FamilyMembers f " +
-            "JOIN RelationshipTypes r ON r.Id = f.RelationshipTypeId WHERE f.ChildId = @id ORDER BY f.Id";
-        using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
+            "INNER JOIN RelationshipTypes r ON r.Id = f.RelationshipTypeId WHERE f.ChildId = @id ORDER BY f.Id";
+        using (MySqlCommand command = new MySqlCommand(sql, connection))
         {
-            command.Parameters.AddWithValue("@id", child.Id);
+            command.Parameters.AddWithValue("@id", child.getId());
             using (MySqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
                     FamilyMember member = new FamilyMember();
-                    member.Id = reader.GetInt32("Id");
-                    member.ChildId = child.Id;
-                    member.Child = child;
-                    member.Name = reader.GetString("Name");
-                    member.Age = reader.GetInt32("Age");
-                    member.RelationshipTypeId = reader.GetInt32("RelationshipTypeId");
+                    member.setId(reader.GetInt32("Id"));
+                    member.setChildId(child.getId());
+                    member.setChild(child);
+                    member.setName(reader.GetString("Name"));
+                    member.setAge(reader.GetInt32("Age"));
+                    member.setRelationshipTypeId(reader.GetInt32("RelationshipTypeId"));
                     if (!reader.IsDBNull(reader.GetOrdinal("OtherRelationship")))
                     {
-                        member.OtherRelationship = reader.GetString("OtherRelationship");
+                        member.setOtherRelationship(reader.GetString("OtherRelationship"));
                     }
                     RelationshipType type = new RelationshipType();
-                    type.Id = member.RelationshipTypeId;
-                    type.Name = reader.GetString("RelationshipName");
-                    member.RelationshipType = type;
-                    child.FamilyMembers.Add(member);
+                    type.setId(member.getRelationshipTypeId());
+                    type.setName(reader.GetString("RelationshipName"));
+                    member.setRelationshipType(type);
+                    child.getFamilyMembers().Add(member);
                 }
             }
         }
     }
 
-    private static int GetNewId(MySqlConnection connection, MySqlTransaction transaction)
+    private static int GetNewId(MySqlConnection connection)
     {
-        using (MySqlCommand command = new MySqlCommand("SELECT LAST_INSERT_ID()", connection, transaction))
+        using (MySqlCommand command = new MySqlCommand("SELECT LAST_INSERT_ID()", connection))
         {
             return Convert.ToInt32(command.ExecuteScalar());
         }
     }
 
-    private static int FindRelatedId(string sql, int childId, MySqlConnection connection, MySqlTransaction transaction)
+    private static int FindRelatedId(string sql, int childId, MySqlConnection connection)
     {
-        using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
+        using (MySqlCommand command = new MySqlCommand(sql, connection))
         {
             command.Parameters.AddWithValue("@childId", childId);
             object? result = command.ExecuteScalar();
@@ -293,9 +278,9 @@ public class ChildRepository : IChildRepository
     }
 
 
-    private static int SaveGuardian(Guardian person, int childId, MySqlConnection connection, MySqlTransaction transaction)
+    private static int SaveGuardian(Guardian person, int childId, MySqlConnection connection)
     {
-        int id = FindRelatedId("SELECT Id FROM Guardians WHERE ChildId = @childId", childId, connection, transaction);
+        int id = FindRelatedId("SELECT Id FROM Guardians WHERE ChildId = @childId", childId, connection);
         string sql;
         if (id == 0)
         {
@@ -305,25 +290,25 @@ public class ChildRepository : IChildRepository
         {
             sql = "UPDATE Guardians SET Name = @Name, Cpf = @Cpf, Rg = @Rg WHERE ChildId = @childId";
         }
-        using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
+        using (MySqlCommand command = new MySqlCommand(sql, connection))
         {
             command.Parameters.AddWithValue("@childId", childId);
-            command.Parameters.AddWithValue("@Name", person.Name);
-            command.Parameters.AddWithValue("@Cpf", person.Cpf);
-            command.Parameters.AddWithValue("@Rg", person.Rg);
+            command.Parameters.AddWithValue("@Name", person.getName());
+            command.Parameters.AddWithValue("@Cpf", person.getCpf());
+            command.Parameters.AddWithValue("@Rg", person.getRg());
             command.ExecuteNonQuery();
             if (id == 0)
             {
-                id = GetNewId(connection, transaction);
+                id = GetNewId(connection);
             }
         }
         return id;
     }
 
 
-    private static int SaveEmergencyContact(EmergencyContact person, int childId, MySqlConnection connection, MySqlTransaction transaction)
+    private static int SaveEmergencyContact(EmergencyContact person, int childId, MySqlConnection connection)
     {
-        int id = FindRelatedId("SELECT Id FROM EmergencyContacts WHERE ChildId = @childId", childId, connection, transaction);
+        int id = FindRelatedId("SELECT Id FROM EmergencyContacts WHERE ChildId = @childId", childId, connection);
         string sql;
         if (id == 0)
         {
@@ -333,27 +318,27 @@ public class ChildRepository : IChildRepository
         {
             sql = "UPDATE EmergencyContacts SET Name = @Name, Phone = @Phone WHERE ChildId = @childId";
         }
-        using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
+        using (MySqlCommand command = new MySqlCommand(sql, connection))
         {
             command.Parameters.AddWithValue("@childId", childId);
-            command.Parameters.AddWithValue("@Name", person.Name);
-            command.Parameters.AddWithValue("@Phone", person.Phone);
+            command.Parameters.AddWithValue("@Name", person.getName());
+            command.Parameters.AddWithValue("@Phone", person.getPhone());
             command.ExecuteNonQuery();
             if (id == 0)
             {
-                id = GetNewId(connection, transaction);
+                id = GetNewId(connection);
             }
         }
         return id;
     }
 
 
-    private static List<int> SaveFamilyMembers(Child child, int childId, MySqlConnection connection, MySqlTransaction transaction, bool isUpdate)
+    private static List<int> SaveFamilyMembers(Child child, int childId, MySqlConnection connection, bool isUpdate)
     {
         List<int> existingIds = new List<int>();
         if (isUpdate)
         {
-            using (MySqlCommand command = new MySqlCommand("SELECT Id FROM FamilyMembers WHERE ChildId = @childId", connection, transaction))
+            using (MySqlCommand command = new MySqlCommand("SELECT Id FROM FamilyMembers WHERE ChildId = @childId", connection))
             {
                 command.Parameters.AddWithValue("@childId", childId);
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -366,9 +351,9 @@ public class ChildRepository : IChildRepository
             }
         }
         List<int> savedIds = new List<int>();
-        foreach (FamilyMember member in child.FamilyMembers)
+        foreach (FamilyMember member in child.getFamilyMembers())
         {
-            int id = member.Id;
+            int id = member.getId();
             string sql;
             if (isUpdate && id > 0)
             {
@@ -383,19 +368,19 @@ public class ChildRepository : IChildRepository
                 sql = "INSERT INTO FamilyMembers (RelationshipTypeId, OtherRelationship, Name, Age, ChildId) VALUES (@typeId, @other, @name, @age, @childId)";
                 id = 0;
             }
-            using (MySqlCommand command = new MySqlCommand(sql, connection, transaction))
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
-                command.Parameters.AddWithValue("@typeId", member.RelationshipTypeId);
-                if (member.OtherRelationship == null)
+                command.Parameters.AddWithValue("@typeId", member.getRelationshipTypeId());
+                if (member.getOtherRelationship() == null)
                 {
                     command.Parameters.AddWithValue("@other", DBNull.Value);
                 }
                 else
                 {
-                    command.Parameters.AddWithValue("@other", member.OtherRelationship);
+                    command.Parameters.AddWithValue("@other", member.getOtherRelationship());
                 }
-                command.Parameters.AddWithValue("@name", member.Name);
-                command.Parameters.AddWithValue("@age", member.Age);
+                command.Parameters.AddWithValue("@name", member.getName());
+                command.Parameters.AddWithValue("@age", member.getAge());
                 command.Parameters.AddWithValue("@childId", childId);
                 if (id > 0)
                 {
@@ -404,7 +389,7 @@ public class ChildRepository : IChildRepository
                 command.ExecuteNonQuery();
                 if (id == 0)
                 {
-                    id = GetNewId(connection, transaction);
+                    id = GetNewId(connection);
                 }
                 savedIds.Add(id);
             }
@@ -413,7 +398,7 @@ public class ChildRepository : IChildRepository
         {
             if (!savedIds.Contains(id))
             {
-                using (MySqlCommand command = new MySqlCommand("DELETE FROM FamilyMembers WHERE Id = @id AND ChildId = @childId", connection, transaction))
+                using (MySqlCommand command = new MySqlCommand("DELETE FROM FamilyMembers WHERE Id = @id AND ChildId = @childId", connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@childId", childId);
@@ -426,24 +411,33 @@ public class ChildRepository : IChildRepository
 
     private static void ApplyIds(Child child, int id, int guardianId, int contactId, List<int> familyIds)
     {
-        child.Id = id;
-        child.Guardian!.Id = guardianId;
-        child.Guardian.ChildId = id;
-        child.Guardian.Child = child;
-        child.EmergencyContact!.Id = contactId;
-        child.EmergencyContact.ChildId = id;
-        child.EmergencyContact.Child = child;
-        for (int i = 0; i < child.FamilyMembers.Count; i++)
+        child.setId(id);
+        Guardian? guardian = child.getGuardian();
+        EmergencyContact? contact = child.getEmergencyContact();
+        if (guardian != null)
         {
-            child.FamilyMembers[i].Id = familyIds[i];
-            child.FamilyMembers[i].ChildId = id;
-            child.FamilyMembers[i].Child = child;
+            guardian.setId(guardianId);
+            guardian.setChildId(id);
+            guardian.setChild(child);
+        }
+        if (contact != null)
+        {
+            contact.setId(contactId);
+            contact.setChildId(id);
+            contact.setChild(child);
+        }
+        for (int i = 0; i < child.getFamilyMembers().Count; i++)
+        {
+            FamilyMember member = child.getFamilyMembers()[i];
+            member.setId(familyIds[i]);
+            member.setChildId(id);
+            member.setChild(child);
         }
     }
 
     private static void CheckRelatedData(Child child)
     {
-        if (child.Guardian == null || child.EmergencyContact == null)
+        if (child.getGuardian() == null || child.getEmergencyContact() == null)
         {
             throw new InvalidOperationException("Informe o responsável e o contato de emergência.");
         }

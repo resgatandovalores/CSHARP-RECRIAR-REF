@@ -1,11 +1,10 @@
 using MySqlConnector;
-using Recriar.Application.Interfaces;
 using Recriar.Domain.Entities;
 using Recriar.Infrastructure.Persistence.Context;
 
 namespace Recriar.Infrastructure.Persistence.Repositories;
 
-public class DbActivityLogger : IActivityLogger
+public class DbActivityLogger
 {
     private readonly AppDbContext? _context;
 
@@ -23,7 +22,7 @@ public class DbActivityLogger : IActivityLogger
         AppDbContext context;
         if (_context == null)
         {
-            context = AppDbContextFactory.Create();
+            context = new AppDbContextFactory().Create();
         }
         else
         {

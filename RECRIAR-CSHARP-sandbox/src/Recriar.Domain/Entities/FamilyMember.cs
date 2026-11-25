@@ -5,12 +5,12 @@ namespace Recriar.Domain.Entities
 
         private int _id;
         private int _relationshipTypeId;
-        private RelationshipType _relationshipType;
-        private string _otherRelationship;
+        private RelationshipType? _relationshipType;
+        private string? _otherRelationship;
         private string _name;
         private int _age;
         private int _childId;
-        private Child _child;
+        private Child? _child;
 
         // Inicializa os campos do cadastro.
         public FamilyMember()
@@ -46,23 +46,23 @@ namespace Recriar.Domain.Entities
         }
 
 
-        public RelationshipType getRelationshipType()
+        public RelationshipType? getRelationshipType()
         {
             return _relationshipType;
         }
 
-        public void setRelationshipType(RelationshipType value)
+        public void setRelationshipType(RelationshipType? value)
         {
             _relationshipType = value;
         }
 
 
-        public string getOtherRelationship()
+        public string? getOtherRelationship()
         {
             return _otherRelationship;
         }
 
-        public void setOtherRelationship(string value)
+        public void setOtherRelationship(string? value)
         {
             _otherRelationship = value;
         }
@@ -101,12 +101,12 @@ namespace Recriar.Domain.Entities
         }
 
 
-        public Child getChild()
+        public Child? getChild()
         {
             return _child;
         }
 
-        public void setChild(Child value)
+        public void setChild(Child? value)
         {
             _child = value;
         }

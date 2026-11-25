@@ -1,47 +1,24 @@
 using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using Recriar.Application.Interfaces;
 using Recriar.Domain.Entities;
 
 namespace Recriar.Infrastructure.Export;
-
-/// <summary>
-/// Saves the file (ficha) of a child as an HTML page, which opens in any browser and prints well.
-/// Files are saved in the "fichas" folder next to the program, as ficha_ID.html (C: cadastro_ID.txt).
-/// </summary>
-public class HtmlChildFileExporter : IChildFileExporter
+public class HtmlChildFileExporter
 {
-    // Protege só os caracteres perigosos no HTML (< > & e aspas) e deixa as letras com acento como estão.
-    // "UnicodeRanges.All": todas as letras são permitidas, porque o arquivo já é salvo em UTF-8.
-    private static readonly HtmlEncoder Encoder = HtmlEncoder.Create(UnicodeRanges.All);
 
     private readonly string _folder;
-
-    /// <param name="folder">Folder where the files are saved. When omitted, uses a "fichas" folder next to the program.</param>
     public HtmlChildFileExporter(string? folder = null)
     {
         _folder = folder ?? Path.Combine(AppContext.BaseDirectory, "fichas");
     }
-
-    /// <inheritdoc />
-    public string Export(Child child, IReadOnlyDictionary<int, string> relationshipNames)
+    public string Export(Child child, List<RelationshipType> relationshipNames)
     {
         Directory.CreateDirectory(_folder);
-
-        // No C: sprintf(nomeArquivo, "cadastro_%d.txt", pessoa.id);
-        string path = Path.Combine(_folder, $"ficha_{child.Id}.html");
-
-        // No C: fopen(..., "w") apagava o arquivo antigo e escrevia de novo. WriteAllText faz o mesmo.
-        // UTF-8 para os acentos aparecerem certos.
+        string path = Path.Combine(_folder, $"ficha_{child.getId()}.html");
         File.WriteAllText(path, BuildHtml(child, relationshipNames), Encoding.UTF8);
 
         return path;
     }
-
-    /// <summary>Builds the whole page. Every typed value goes through <see cref="Encode"/>.</summary>
-    // StringBuilder: monta um texto grande pedaço por pedaço sem criar uma string nova a cada "+".
-    private static string BuildHtml(Child child, IReadOnlyDictionary<int, string> relationshipNames)
+    private static string BuildHtml(Child child, List<RelationshipType> relationshipNames)
     {
         var html = new StringBuilder();
 
@@ -49,7 +26,7 @@ public class HtmlChildFileExporter : IChildFileExporter
         html.AppendLine("<html lang=\"pt-BR\">");
         html.AppendLine("<head>");
         html.AppendLine("<meta charset=\"utf-8\">");
-        html.AppendLine($"<title>Ficha {child.Id} - {Encode(child.Name)}</title>");
+        html.AppendLine($"<title>Ficha {child.getId()} - {Encode(child.getName())}</title>");
         html.AppendLine("<style>");
         html.AppendLine("  body { font-family: Arial, sans-serif; margin: 32px; color: #222; }");
         html.AppendLine("  h1 { font-size: 22px; border-bottom: 2px solid #333; padding-bottom: 6px; }");
@@ -59,47 +36,38 @@ public class HtmlChildFileExporter : IChildFileExporter
         html.AppendLine("  th { width: 30%; background: #f7f7f7; }");
         html.AppendLine("  .family th { width: auto; }");
         html.AppendLine("  .footer { margin-top: 32px; font-size: 12px; color: #666; }");
-        // @media print: regras só para a impressão (sem margem extra, cores mantidas).
         html.AppendLine("  @media print { body { margin: 0; } h2 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }");
         html.AppendLine("</style>");
         html.AppendLine("</head>");
         html.AppendLine("<body>");
 
         html.AppendLine("<h1>RECRIAR - Ficha de Cadastro</h1>");
-
-        // No C: "========== CADASTRO =========="
         StartSection(html, "Dados da criança");
-        Row(html, "Número da ficha", child.Id.ToString());
-        Row(html, "Nome", child.Name);
-        Row(html, "Idade", child.Age.ToString());
-        Row(html, "CPF", child.Cpf);
-        Row(html, "RG", child.Rg);
-        Row(html, "Endereço", child.Address);
-        Row(html, "Bairro", child.Neighborhood);
-        Row(html, "Cidade", child.City);
-        Row(html, "Escola", child.School);
-        Row(html, "Nome da mãe", child.MotherName);
-        Row(html, "Nome do pai", child.FatherName);
-        Row(html, "Telefone", child.Phone);
-        Row(html, "Data de cadastro", child.RegistrationDate.ToString("dd/MM/yyyy"));
+        Row(html, "Número da ficha", child.getId().ToString());
+        Row(html, "Nome", child.getName());
+        Row(html, "Idade", child.getAge().ToString());
+        Row(html, "CPF", child.getCpf());
+        Row(html, "RG", child.getRg());
+        Row(html, "Endereço", child.getAddress());
+        Row(html, "Bairro", child.getNeighborhood());
+        Row(html, "Cidade", child.getCity());
+        Row(html, "Escola", child.getSchool());
+        Row(html, "Nome da mãe", child.getMotherName());
+        Row(html, "Nome do pai", child.getFatherName());
+        Row(html, "Telefone", child.getPhone());
+        Row(html, "Data de cadastro", child.getRegistrationDate().ToString("dd/MM/yyyy"));
         EndSection(html);
-
-        // No C: "===== RESPONSAVEL ====="
         StartSection(html, "Responsável");
-        Row(html, "Nome", child.Guardian?.Name);
-        Row(html, "RG", child.Guardian?.Rg);
-        Row(html, "CPF", child.Guardian?.Cpf);
+        Row(html, "Nome", child.getGuardian()?.getName());
+        Row(html, "RG", child.getGuardian()?.getRg());
+        Row(html, "CPF", child.getGuardian()?.getCpf());
         EndSection(html);
-
-        // No C: "===== CONTATO EMERGENCIA ====="
         StartSection(html, "Contato de emergência");
-        Row(html, "Nome", child.EmergencyContact?.Name);
-        Row(html, "Telefone", child.EmergencyContact?.Phone);
+        Row(html, "Nome", child.getEmergencyContact()?.getName());
+        Row(html, "Telefone", child.getEmergencyContact()?.getPhone());
         EndSection(html);
-
-        // No C: "===== COMPOSICAO FAMILIAR =====" com um bloco por familiar. Aqui vira uma tabela.
         html.AppendLine("<h2>Composição familiar</h2>");
-        if (child.FamilyMembers.Count == 0)
+        if (child.getFamilyMembers().Count == 0)
         {
             html.AppendLine("<p>Nenhum familiar cadastrado.</p>");
         }
@@ -107,21 +75,19 @@ public class HtmlChildFileExporter : IChildFileExporter
         {
             html.AppendLine("<table class=\"family\">");
             html.AppendLine("<tr><th>Parentesco</th><th>Nome</th><th>Idade</th></tr>");
-            foreach (FamilyMember member in child.FamilyMembers)
+            foreach (FamilyMember member in child.getFamilyMembers())
             {
                 html.AppendLine(
                     $"<tr><td>{Encode(RelationshipText(member, relationshipNames))}</td>" +
-                    $"<td>{Encode(member.Name)}</td>" +
-                    $"<td>{member.Age}</td></tr>");
+                    $"<td>{Encode(member.getName())}</td>" +
+                    $"<td>{member.getAge()}</td></tr>");
             }
             html.AppendLine("</table>");
         }
-
-        // No C: "===== OUTRAS INFORMACOES ====="
         StartSection(html, "Outras informações");
-        Row(html, "Centro de saúde", child.HealthCenter);
-        Row(html, "Número da ficha (saúde)", child.FileNumber);
-        Row(html, "Alergia", child.Allergy);
+        Row(html, "Centro de saúde", child.getHealthCenter());
+        Row(html, "Número da ficha (saúde)", child.getFileNumber());
+        Row(html, "Alergia", child.getAllergy());
         EndSection(html);
 
         html.AppendLine($"<p class=\"footer\">Ficha gerada em {DateTime.Now:dd/MM/yyyy HH:mm}.</p>");
@@ -130,25 +96,22 @@ public class HtmlChildFileExporter : IChildFileExporter
 
         return html.ToString();
     }
-
-    /// <summary>
-    /// Kinship shown in the file: the text written by the user when it is "Outro",
-    /// otherwise the name of the option.
-    /// </summary>
-    private static string RelationshipText(FamilyMember member, IReadOnlyDictionary<int, string> relationshipNames)
+    private static string RelationshipText(FamilyMember member, List<RelationshipType> relationshipNames)
     {
-        if (member.RelationshipTypeId == RelationshipType.OtherId && !string.IsNullOrWhiteSpace(member.OtherRelationship))
+        if (member.getRelationshipTypeId() == new RelationshipType().getOtherId() && !string.IsNullOrWhiteSpace(member.getOtherRelationship()))
         {
-            return member.OtherRelationship;
+            return member.getOtherRelationship() ?? "";
         }
 
-        // TryGetValue: procura no dicionário sem dar erro se a chave não existir.
-        if (relationshipNames.TryGetValue(member.RelationshipTypeId, out string? name))
+        foreach (RelationshipType type in relationshipNames)
         {
-            return name;
+            if (type.getId() == member.getRelationshipTypeId())
+            {
+                return type.getName();
+            }
         }
 
-        return member.RelationshipType?.Name ?? string.Empty;
+        return member.getRelationshipType()?.getName() ?? string.Empty;
     }
 
     private static void StartSection(StringBuilder html, string title)
@@ -157,18 +120,17 @@ public class HtmlChildFileExporter : IChildFileExporter
         html.AppendLine("<table>");
     }
 
-    private static void EndSection(StringBuilder html) => html.AppendLine("</table>");
-
-    /// <summary>One line "label | value". Empty values are shown as a dash.</summary>
+    private static void EndSection(StringBuilder html)
+    {
+        html.AppendLine("</table>");
+    }
     private static void Row(StringBuilder html, string label, string? value)
     {
         string shown = string.IsNullOrWhiteSpace(value) ? "-" : value;
         html.AppendLine($"<tr><th>{Encode(label)}</th><td>{Encode(shown)}</td></tr>");
     }
-
-    /// <summary>
-    /// Makes typed text safe inside HTML: characters such as &lt; and &gt; are written as text,
-    /// so a value like "&lt;script&gt;" is shown, never run as code.
-    /// </summary>
-    private static string Encode(string? text) => Encoder.Encode(text ?? string.Empty);
+    private static string Encode(string? text)
+    {
+        return System.Net.WebUtility.HtmlEncode(text ?? string.Empty);
+    }
 }

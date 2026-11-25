@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
   <!-- //criando referencia entre projetos -->
     <ProjectReference Include="..\Recriar.Domain\Recriar.Domain.csproj" />
+    <ProjectReference Include="..\Recriar.Infrastructure\Recriar.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

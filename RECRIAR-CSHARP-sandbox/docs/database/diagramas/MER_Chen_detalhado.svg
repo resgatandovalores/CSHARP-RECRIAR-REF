@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="2500" height="1650" preserveAspectRatio="xMinYMin meet" viewBox="0 0 2500 1650" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="2500" height="1650"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-1650)" style="clip-path: url(#clip)">
+		<g transform="">
+			<text x="906.9052734375" y="1595" style="font-family: ArialB; font-size: 38px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,3190) scale(1,-1)">RECRIAR - MER do cadastro principal</text>
+			<text x="879.775390625" y="1550" style="font-family: Arial; font-size: 24px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,3100) scale(1,-1)">Notação Chen: entidades, atributos identificadores e relacionamentos</text>
+			<polyline points="545 1110, 1055 1110" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<polygon points="717 1110, 800 1155, 883 1110, 800 1065" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="768.203125" y="1103" style="font-family: Arial; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2206) scale(1,-1)">possui</text>
+			<text x="572.486328125" y="1132" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2264) scale(1,-1)">0..1</text>
+			<text x="1004.160400390625" y="1132" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2264) scale(1,-1)">1</text>
+			<polyline points="1345 1110, 1855 1110" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<polygon points="1517 1110, 1600 1155, 1683 1110, 1600 1065" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1568.203125" y="1103" style="font-family: Arial; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2206) scale(1,-1)">possui</text>
+			<text x="1384.160400390625" y="1132" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2264) scale(1,-1)">1</text>
+			<text x="1790.7431640625" y="1132" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2264) scale(1,-1)">0..N</text>
+			<polyline points="1200 1065, 1200 580, 545 580" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<polygon points="717 580, 800 625, 883 580, 800 535" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="768.203125" y="573" style="font-family: Arial; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1146) scale(1,-1)">possui</text>
+			<text x="1224.160400390625" y="1010" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2020) scale(1,-1)">1</text>
+			<text x="572.486328125" y="603" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1206) scale(1,-1)">0..1</text>
+			<polyline points="2000 1065, 2000 625" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<polygon points="1917 850, 2000 895, 2083 850, 2000 805" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1955.376953125" y="843" style="font-family: Arial; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1686) scale(1,-1)">classifica</text>
+			<text x="2040.7431640625" y="1010" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2020) scale(1,-1)">0..N</text>
+			<text x="2034.160400390625" y="660" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1320) scale(1,-1)">1</text>
+			<rect x="1055" y="1065" width="290" height="90" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1150.475830078125" y="1114" style="font-family: ArialB; font-size: 27px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2228) scale(1,-1)">Criança</text>
+			<text x="1164.620849609375" y="1087" style="font-family: Arial; font-size: 19px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2174) scale(1,-1)">Children</text>
+			<rect x="255" y="1065" width="290" height="90" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="316.712646484375" y="1114" style="font-family: ArialB; font-size: 27px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2228) scale(1,-1)">Responsável</text>
+			<text x="356.169189453125" y="1087" style="font-family: Arial; font-size: 19px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2174) scale(1,-1)">Guardians</text>
+			<rect x="255" y="535" width="290" height="90" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="278.36083984375" y="584" style="font-family: ArialB; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1168) scale(1,-1)">Contato de emergência</text>
+			<text x="314.462890625" y="557" style="font-family: Arial; font-size: 19px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1114) scale(1,-1)">EmergencyContacts</text>
+			<rect x="1855" y="1065" width="290" height="90" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1948.22802734375" y="1114" style="font-family: ArialB; font-size: 27px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2228) scale(1,-1)">Familiar</text>
+			<text x="1932.437744140625" y="1087" style="font-family: Arial; font-size: 19px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2174) scale(1,-1)">FamilyMembers</text>
+			<rect x="1855" y="535" width="290" height="90" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1927.21337890625" y="584" style="font-family: ArialB; font-size: 27px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1168) scale(1,-1)">Parentesco</text>
+			<text x="1921.84765625" y="557" style="font-family: Arial; font-size: 19px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1114) scale(1,-1)">RelationshipTypes</text>
+			<polyline points="1055 1143.229, 798.5457 1202" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="720.0" cy="1220.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="710.6689453125" y="1213" style="font-family: ArialB; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2426) scale(1,-1)">Id</text>
+			<path d="M 710.668945,1207 L 729.331055,1207 Z" style="stroke: rgb(8%,21%,28%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polyline points="1139.423 1155, 889.2321 1340.856" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="850.0" cy="1370.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="821.991455078125" y="1363" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2726) scale(1,-1)">Nome</text>
+			<polyline points="1184.789 1155, 1090.747 1433.205" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="1080.0" cy="1465.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1053.724365234375" y="1458" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2916) scale(1,-1)">Idade</text>
+			<polyline points="1216.479 1155, 1318.37 1433.241" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="1330.0" cy="1465.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1309.0" y="1458" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2916) scale(1,-1)">CPF</text>
+			<polyline points="1260.577 1155, 1510.768 1340.856" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="1550.0" cy="1370.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1509.13818359375" y="1363" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2726) scale(1,-1)">Telefone</text>
+			<polyline points="1345 1145.444, 1568.569 1200.095" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="1650.0" cy="1220.0" rx="104.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1570.034912109375" y="1213" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2426) scale(1,-1)">Data de cadastro</text>
+			<polyline points="353.125 1155, 181.4533 1319.805" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="150.0" cy="1350.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="140.6689453125" y="1343" style="font-family: ArialB; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2686) scale(1,-1)">Id</text>
+			<path d="M 140.668945,1337 L 159.331055,1337 Z" style="stroke: rgb(8%,21%,28%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polyline points="398.5484 1155, 391.0322 1388.002" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="390.0" cy="1420.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="361.991455078125" y="1413" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2826) scale(1,-1)">Nome</text>
+			<polyline points="443.2692 1155, 620.7278 1339.557" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="650.0" cy="1370.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="629.0" y="1363" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2726) scale(1,-1)">CPF</text>
+			<polyline points="289.5455 1155, 190.5345 1195.338" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="130.0" cy="1220.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="114.25" y="1213" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2426) scale(1,-1)">RG</text>
+			<polyline points="1961.176 1155, 1806.511 1334.271" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="1780.0" cy="1365.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1770.6689453125" y="1358" style="font-family: ArialB; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2716) scale(1,-1)">Id</text>
+			<path d="M 1770.668945,1352 L 1789.331055,1352 Z" style="stroke: rgb(8%,21%,28%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polyline points="2002.903 1155, 2017.936 1388.008" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="2020.0" cy="1420.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1991.991455078125" y="1413" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2826) scale(1,-1)">Nome</text>
+			<polyline points="2046.8 1155, 2228.591 1329.8" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="2260.0" cy="1360.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="2233.724365234375" y="1353" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2706) scale(1,-1)">Idade</text>
+			<polyline points="2126.818 1155, 2241.866 1195.824" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="2310.0" cy="1220.0" rx="104.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="2228.87109375" y="1213" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2426) scale(1,-1)">Outro parentesco</text>
+			<polyline points="344.2857 535, 176.5665 399.5345" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="140.0" cy="370.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="130.6689453125" y="363" style="font-family: ArialB; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,726) scale(1,-1)">Id</text>
+			<path d="M 130.668945,357 L 149.331055,357 Z" style="stroke: rgb(8%,21%,28%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polyline points="400 535, 400 292" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="400.0" cy="260.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="371.991455078125" y="253" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,506) scale(1,-1)">Nome</text>
+			<polyline points="462.1429 535, 649.9323 399.0146" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="690.0" cy="370.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="649.13818359375" y="363" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,726) scale(1,-1)">Telefone</text>
+			<polyline points="1965.385 535, 1823.828 350.977" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="1800.0" cy="320.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="1790.6689453125" y="313" style="font-family: ArialB; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,626) scale(1,-1)">Id</text>
+			<path d="M 1790.668945,307 L 1809.331055,307 Z" style="stroke: rgb(8%,21%,28%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polyline points="2038.077 535, 2193.96 350.7744" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+			<ellipse cx="2220.0" cy="320.0" rx="95.0" ry="32.0" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="2191.991455078125" y="313" style="font-family: Arial; font-size: 21px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,626) scale(1,-1)">Nome</text>
+			<text x="736.761962890625" y="160" style="font-family: Arial; font-size: 23px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,320) scale(1,-1)">LEGENDA: retângulo = entidade | elipse (bolinha) = atributo | atributo sublinhado = identificador (PK)</text>
+			<text x="790.99951171875" y="120" style="font-family: Arial; font-size: 23px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,240) scale(1,-1)">Losango = relacionamento | 0..1 = zero ou um | 0..N = zero ou vários | 1 = exatamente um</text>
+			<text x="689.34375" y="80" style="font-family: Arial; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,160) scale(1,-1)">O MER destaca atributos essenciais; as FKs e todos os campos físicos aparecem no DER completo de 11 tabelas.</text>
+			<text x="739.4453125" y="40" style="font-family: Arial; font-size: 22px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,80) scale(1,-1)">No banco, responsável e contato são opcionais (0..1); o serviço C# exige ambos ao cadastrar uma ficha.</text>
+		</g>
+	</g>
+</svg>

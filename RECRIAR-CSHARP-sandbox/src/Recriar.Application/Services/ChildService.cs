@@ -58,7 +58,7 @@ namespace Recriar.Application.Services
             try
             {
 
-                Child entity = _children.GetById(id);
+                Child? entity = _children.GetById(id);
                 if (entity == null) throw new ArgumentException(new ErrorMessages().getChildNotFound());
 
                 ChildDto data = PrepareAndValidate(child);
@@ -81,7 +81,7 @@ namespace Recriar.Application.Services
             try
             {
 
-                Child entity = _children.GetById(id);
+                Child? entity = _children.GetById(id);
                 if (entity == null) throw new ArgumentException(new ErrorMessages().getChildNotFound());
 
                 if (!_children.Delete(id))
@@ -130,7 +130,7 @@ namespace Recriar.Application.Services
         {
             try
             {
-                Child entity = _children.GetById(id);
+                Child? entity = _children.GetById(id);
                 if (entity == null) throw new ArgumentException(new ErrorMessages().getChildNotFound());
                 return new ChildMapper().ToDto(entity);
             }
@@ -146,7 +146,7 @@ namespace Recriar.Application.Services
         {
             try
             {
-                Child entity = _children.GetById(id);
+                Child? entity = _children.GetById(id);
                 if (entity == null) throw new ArgumentException(new ErrorMessages().getChildNotFound());
 
                 List<RelationshipType> relationshipNames = new List<RelationshipType>();

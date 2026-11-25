@@ -1,8 +1,7 @@
 using Recriar.Application.Exceptions;
-using Recriar.Application.Interfaces;
 using Recriar.Application.Services;
-using Recriar.Infrastructure.Export;
 using Recriar.Infrastructure.Logging;
+using Recriar.Infrastructure.Export;
 using Recriar.Infrastructure.Persistence.Context;
 using Recriar.Infrastructure.Persistence.Repositories;
 using Recriar.Domain.Entities;
@@ -17,13 +16,13 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
 
-        IErrorLogger errorLogger = new FileErrorLogger();
+        FileErrorLogger errorLogger = new FileErrorLogger();
         System.Windows.Forms.Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
         System.Windows.Forms.Application.ThreadException += (_, e) => ShowUnexpectedError(e.Exception, "Tela", errorLogger);
 
         try
         {
-            IChildService service = CreateService(errorLogger);
+            ChildService service = CreateService(errorLogger);
             using var mainForm = new MainForm(service, errorLogger);
             System.Windows.Forms.Application.Run(mainForm);
         }
@@ -33,9 +32,9 @@ internal static class Program
         }
     }
 
-    private static IChildService CreateService(IErrorLogger errorLogger)
+    private static ChildService CreateService(FileErrorLogger errorLogger)
     {
-        AppDbContext context = AppDbContextFactory.Create();
+        AppDbContext context = new AppDbContextFactory().Create();
 
         // Check the write connection before opening the main window.
         using (var connection = context.CreateWriteConnection())
@@ -43,14 +42,14 @@ internal static class Program
             connection.Open();
         }
 
-        IChildRepository children = new ChildRepository(context);
-        IRelationshipTypeRepository relationshipTypes = new RelationshipTypeRepository(context);
-        IActivityLogger activityLogger = new DbActivityLogger(context);
+        ChildRepository children = new ChildRepository(context);
+        RelationshipTypeRepository relationshipTypes = new RelationshipTypeRepository(context);
+        DbActivityLogger activityLogger = new DbActivityLogger(context);
 
         bool hasOther = false;
         foreach (RelationshipType type in relationshipTypes.GetAll())
         {
-            if (type.Id == RelationshipType.OtherId && type.Name == "Outro")
+            if (type.getId() == new RelationshipType().getOtherId() && type.getName() == "Outro")
             {
                 hasOther = true;
             }
@@ -64,26 +63,22 @@ internal static class Program
     }
 
     private static ChildService CreateChildService(
-        IChildRepository children,
-        IRelationshipTypeRepository relationshipTypes,
-        IActivityLogger activityLogger,
-        IErrorLogger errorLogger)
+        ChildRepository children,
+        RelationshipTypeRepository relationshipTypes,
+        DbActivityLogger activityLogger,
+        FileErrorLogger errorLogger)
     {
         return new ChildService(children, relationshipTypes, activityLogger, errorLogger,
             new HtmlChildFileExporter());
     }
 
-    private static void ShowUnexpectedError(Exception exception, string context, IErrorLogger errorLogger)
+    private static void ShowUnexpectedError(Exception exception, string context, FileErrorLogger errorLogger)
     {
         errorLogger.LogError(exception, context);
-        string message = ErrorHandler.GetMessage(exception);
+        string message = new ErrorHandler().GetMessage(exception);
         if (context == "Abertura do programa")
         {
-            message = "Não foi possível iniciar o RECRIAR com o MySQL.\n\n" +
-                "Confira se o servidor está ligado, se os dois bancos foram instalados e se as " +
-                "variáveis RECRIAR_CONNECTION_STRING e RECRIAR_READ_CONNECTION_STRING " +
-                "estão configuradas nesta sessão.\n\n" +
-                "Veja as instruções em docs/database/README.md.";
+            message = "Não foi possível abrir o banco.\n\nConfira se o MySQL está ligado e se o arquivo conexao.txt está ao lado do programa.\n\n" + exception.Message;
         }
         MessageBox.Show(message, "Atenção",
             MessageBoxButtons.OK, MessageBoxIcon.Warning);

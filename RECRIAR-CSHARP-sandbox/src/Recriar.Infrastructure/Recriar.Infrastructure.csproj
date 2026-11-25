@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Recriar.Application\Recriar.Application.csproj" />
+    <ProjectReference Include="..\Recriar.Domain\Recriar.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

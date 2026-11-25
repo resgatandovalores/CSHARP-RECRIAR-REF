@@ -26,12 +26,13 @@ internal sealed class FamilyMemberForm : Form
         ShowInTaskbar = true;
 
         _relationship.AccessibleName = "Parentesco";
-        _relationship.DisplayMember = nameof(RelationshipType.Name);
-        _relationship.ValueMember = nameof(RelationshipType.Id);
-        _relationship.DataSource = relationships;
-        _name.Text = member.Name;
-        _age.Text = member.Age;
-        _other.Text = member.OtherRelationship;
+        foreach (RelationshipType type in relationships)
+        {
+            _relationship.Items.Add(type.getName());
+        }
+        _name.Text = member.getName();
+        _age.Text = member.getAge();
+        _other.Text = member.getOtherRelationship();
 
         var layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 5, Padding = new Padding(12) };
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 145));
@@ -55,30 +56,34 @@ internal sealed class FamilyMemberForm : Form
         // Data binding can select the first item while the dialog is being created.
         Load += (_, _) =>
         {
-            _relationship.SelectedValue = member.RelationshipTypeId;
+            for (int i = 0; i < relationships.Count; i++)
+            {
+                if (relationships[i].getId() == member.getRelationshipTypeId())
+                    _relationship.SelectedIndex = i;
+            }
             UpdateOtherField();
         };
-        _relationship.SelectedValueChanged += (_, _) => UpdateOtherField();
+        _relationship.SelectedIndexChanged += (_, _) => UpdateOtherField();
         AcceptButton = apply;
         CancelButton = cancel;
         apply.Click += (_, _) =>
         {
-            int relationshipId = _relationship.SelectedValue is int id ? id : 0;
-            Member = new FamilyMemberDto
-            {
-                Id = member.Id,
-                Name = _name.Text,
-                Age = _age.Text,
-                RelationshipTypeId = relationshipId,
-                OtherRelationship = relationshipId == RelationshipType.OtherId ? _other.Text : string.Empty
-            };
+            int relationshipId = 0;
+            if (_relationship.SelectedIndex >= 0)
+                relationshipId = relationships[_relationship.SelectedIndex].getId();
+            Member = new FamilyMemberDto();
+        Member.setId(member.getId());
+        Member.setName(_name.Text);
+        Member.setAge(_age.Text);
+        Member.setRelationshipTypeId(relationshipId);
+        Member.setOtherRelationship(relationshipId == new RelationshipType().getOtherId() ? _other.Text : string.Empty);
             DialogResult = DialogResult.OK;
         };
     }
 
     private void UpdateOtherField()
     {
-        bool isOther = _relationship.SelectedValue is int id && id == RelationshipType.OtherId;
+        bool isOther = _relationship.SelectedItem as string == "Outro";
         _otherLabel.Visible = _other.Visible = isOther;
     }
 

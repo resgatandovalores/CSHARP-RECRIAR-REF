@@ -1,11 +1,10 @@
 using MySqlConnector;
-using Recriar.Application.Interfaces;
 using Recriar.Domain.Entities;
 using Recriar.Infrastructure.Persistence.Context;
 
 namespace Recriar.Infrastructure.Persistence.Repositories;
 
-public class RelationshipTypeRepository : IRelationshipTypeRepository
+public class RelationshipTypeRepository
 {
     private readonly AppDbContext _context;
 
@@ -27,8 +26,8 @@ public class RelationshipTypeRepository : IRelationshipTypeRepository
                 while (reader.Read())
                 {
                     RelationshipType type = new RelationshipType();
-                    type.Id = reader.GetInt32("Id");
-                    type.Name = reader.GetString("Name");
+                    type.setId(reader.GetInt32("Id"));
+                    type.setName(reader.GetString("Name"));
                     types.Add(type);
                 }
             }

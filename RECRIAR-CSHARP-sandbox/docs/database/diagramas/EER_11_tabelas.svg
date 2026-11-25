@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1930" height="1180" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1930 1180" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1930" height="1180"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-1180)" style="clip-path: url(#clip)">
+		<g transform="">
+			<polyline points="380 980, 445 980, 445 950, 510 950" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="394" y="995" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1990) scale(1,-1)">0..1</text>
+			<text x="477" y="965" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1930) scale(1,-1)">1</text>
+			<polyline points="380 690, 445 690, 445 870, 510 870" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="390" y="668" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1336) scale(1,-1)">0..1</text>
+			<text x="477" y="850" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1700) scale(1,-1)">1</text>
+			<polyline points="870 970, 1000 970" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="887" y="987" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1974) scale(1,-1)">1</text>
+			<text x="950" y="987" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1974) scale(1,-1)">0..N</text>
+			<polyline points="1360 970, 1425 970, 1425 1000, 1490 1000" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="1370" y="987" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1974) scale(1,-1)">0..N</text>
+			<text x="1462" y="1017" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2034) scale(1,-1)">1</text>
+			<polyline points="870 830, 935 830, 935 570, 1670 570, 1670 470" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="887" y="810" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1620) scale(1,-1)">1</text>
+			<text x="1685" y="500" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1000) scale(1,-1)">0..N</text>
+			<polyline points="380 415, 510 415" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="394" y="432" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,864) scale(1,-1)">1</text>
+			<text x="460" y="432" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,864) scale(1,-1)">0..N</text>
+			<polyline points="870 415, 1000 415" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="887" y="432" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,864) scale(1,-1)">1</text>
+			<text x="950" y="432" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,864) scale(1,-1)">0..N</text>
+			<polyline points="1360 415, 1490 415" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="1375" y="432" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,864) scale(1,-1)">1</text>
+			<text x="1440" y="432" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,864) scale(1,-1)">0..N</text>
+			<polyline points="1670 338, 1670 210" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.6; fill: None; fill-rule: evenodd;"/>
+			<text x="1685" y="320" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,640) scale(1,-1)">1</text>
+			<text x="1685" y="230" style="font-family: ArialB; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,460) scale(1,-1)">0..1</text>
+			<rect x="510" y="361" width="360" height="109" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="510" y="438" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="522" y="447" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,894) scale(1,-1)">Activities</text>
+			<text x="522" y="414" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">Id : int</text>
+			<text x="758" y="414" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">PK AI</text>
+			<text x="522" y="391" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">ProgramId : int</text>
+			<text x="758" y="391" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">FK</text>
+			<text x="522" y="368" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,736) scale(1,-1)">Name : varchar(100)</text>
+			<rect x="1490" y="618" width="360" height="132" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="1490" y="718" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1502" y="727" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1454) scale(1,-1)">ActivityLogs</text>
+			<text x="1502" y="694" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1388) scale(1,-1)">Id : int</text>
+			<text x="1738" y="694" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1388) scale(1,-1)">PK AI</text>
+			<text x="1502" y="671" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1342) scale(1,-1)">Action : varchar(100)</text>
+			<text x="1502" y="648" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1296) scale(1,-1)">Description : varchar(255)</text>
+			<text x="1502" y="625" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1250) scale(1,-1)">CreatedAt : datetime</text>
+			<rect x="1000" y="315" width="360" height="155" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="1000" y="438" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1012" y="447" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,894) scale(1,-1)">ActivitySessions</text>
+			<text x="1012" y="414" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">Id : int</text>
+			<text x="1248" y="414" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">PK AI</text>
+			<text x="1012" y="391" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">ActivityId : int</text>
+			<text x="1248" y="391" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">FK</text>
+			<text x="1012" y="368" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,736) scale(1,-1)">StartsAt : datetime</text>
+			<text x="1012" y="345" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,690) scale(1,-1)">EndsAt : datetime</text>
+			<text x="1012" y="322" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,644) scale(1,-1)">Location : varchar(100)</text>
+			<rect x="1490" y="78" width="360" height="132" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="1490" y="178" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1502" y="187" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,374) scale(1,-1)">AttendanceRecords</text>
+			<text x="1502" y="154" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,308) scale(1,-1)">Id : int</text>
+			<text x="1738" y="154" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,308) scale(1,-1)">PK AI</text>
+			<text x="1502" y="131" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,262) scale(1,-1)">SessionEnrollmentId : int</text>
+			<text x="1738" y="131" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,262) scale(1,-1)">FK UQ</text>
+			<text x="1502" y="108" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,216) scale(1,-1)">Attended : tinyint(1)</text>
+			<text x="1502" y="85" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,170) scale(1,-1)">RecordedAt : datetime</text>
+			<rect x="510" y="642" width="360" height="408" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="510" y="1018" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="522" y="1027" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2054) scale(1,-1)">Children</text>
+			<text x="522" y="994" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">Id : int</text>
+			<text x="758" y="994" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">PK AI</text>
+			<text x="522" y="971" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1942) scale(1,-1)">Name : varchar(100)</text>
+			<text x="522" y="948" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1896) scale(1,-1)">Age : int</text>
+			<text x="522" y="925" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1850) scale(1,-1)">Cpf : varchar(20)</text>
+			<text x="522" y="902" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1804) scale(1,-1)">Rg : varchar(20)</text>
+			<text x="522" y="879" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1758) scale(1,-1)">Address : varchar(100)</text>
+			<text x="522" y="856" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1712) scale(1,-1)">Neighborhood : varchar(50)</text>
+			<text x="522" y="833" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1666) scale(1,-1)">City : varchar(50)</text>
+			<text x="522" y="810" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1620) scale(1,-1)">School : varchar(100)</text>
+			<text x="522" y="787" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1574) scale(1,-1)">MotherName : varchar(100)</text>
+			<text x="522" y="764" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1528) scale(1,-1)">FatherName : varchar(100)</text>
+			<text x="522" y="741" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1482) scale(1,-1)">Phone : varchar(20)</text>
+			<text x="522" y="718" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1436) scale(1,-1)">RegistrationDate : date</text>
+			<text x="522" y="695" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1390) scale(1,-1)">HealthCenter : varchar(100)</text>
+			<text x="522" y="672" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1344) scale(1,-1)">FileNumber : varchar(50)</text>
+			<text x="522" y="649" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1298) scale(1,-1)">Allergy : varchar(100)</text>
+			<rect x="20" y="618" width="360" height="132" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="20" y="718" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="32" y="727" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1454) scale(1,-1)">EmergencyContacts</text>
+			<text x="32" y="694" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1388) scale(1,-1)">Id : int</text>
+			<text x="268" y="694" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1388) scale(1,-1)">PK AI</text>
+			<text x="32" y="671" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1342) scale(1,-1)">Name : varchar(100)</text>
+			<text x="32" y="648" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1296) scale(1,-1)">Phone : varchar(20)</text>
+			<text x="32" y="625" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1250) scale(1,-1)">ChildId : int</text>
+			<text x="268" y="625" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1250) scale(1,-1)">FK UQ</text>
+			<rect x="1000" y="872" width="360" height="178" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="1000" y="1018" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1012" y="1027" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2054) scale(1,-1)">FamilyMembers</text>
+			<text x="1012" y="994" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">Id : int</text>
+			<text x="1248" y="994" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">PK AI</text>
+			<text x="1012" y="971" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1942) scale(1,-1)">RelationshipTypeId : int</text>
+			<text x="1248" y="971" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1942) scale(1,-1)">FK</text>
+			<text x="1012" y="948" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1896) scale(1,-1)">OtherRelationship : varchar(50)</text>
+			<text x="1248" y="948" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1896) scale(1,-1)">NULL</text>
+			<text x="1012" y="925" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1850) scale(1,-1)">Name : varchar(100)</text>
+			<text x="1012" y="902" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1804) scale(1,-1)">Age : int</text>
+			<text x="1012" y="879" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1758) scale(1,-1)">ChildId : int</text>
+			<text x="1248" y="879" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1758) scale(1,-1)">FK</text>
+			<rect x="20" y="895" width="360" height="155" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="20" y="1018" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="32" y="1027" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2054) scale(1,-1)">Guardians</text>
+			<text x="32" y="994" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">Id : int</text>
+			<text x="268" y="994" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">PK AI</text>
+			<text x="32" y="971" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1942) scale(1,-1)">Name : varchar(100)</text>
+			<text x="32" y="948" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1896) scale(1,-1)">Rg : varchar(20)</text>
+			<text x="32" y="925" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1850) scale(1,-1)">Cpf : varchar(20)</text>
+			<text x="32" y="902" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1804) scale(1,-1)">ChildId : int</text>
+			<text x="268" y="902" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1804) scale(1,-1)">FK UQ</text>
+			<rect x="20" y="361" width="360" height="109" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="20" y="438" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="32" y="447" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,894) scale(1,-1)">Programs</text>
+			<text x="32" y="414" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">Id : int</text>
+			<text x="268" y="414" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">PK AI</text>
+			<text x="32" y="391" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">Name : varchar(100)</text>
+			<text x="32" y="368" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,736) scale(1,-1)">Description : varchar(255)</text>
+			<rect x="1490" y="964" width="360" height="86" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="1490" y="1018" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1502" y="1027" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2054) scale(1,-1)">RelationshipTypes</text>
+			<text x="1502" y="994" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">Id : int</text>
+			<text x="1738" y="994" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1988) scale(1,-1)">PK</text>
+			<text x="1502" y="971" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,1942) scale(1,-1)">Name : varchar(50)</text>
+			<rect x="1490" y="338" width="360" height="132" style="stroke: rgb(25%,40%,47%); stroke-linecap: butt; stroke-width: 1.3; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="1490" y="438" width="360" height="32" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 0; fill: rgb(90%,94%,96%); fill-rule: evenodd;"/>
+			<text x="1502" y="447" style="font-family: ArialB; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,894) scale(1,-1)">SessionEnrollments</text>
+			<text x="1502" y="414" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">Id : int</text>
+			<text x="1738" y="414" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,828) scale(1,-1)">PK AI</text>
+			<text x="1502" y="391" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">ChildId : int</text>
+			<text x="1738" y="391" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,782) scale(1,-1)">FK</text>
+			<text x="1502" y="368" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,736) scale(1,-1)">SessionId : int</text>
+			<text x="1738" y="368" style="font-family: ArialB; font-size: 10px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,736) scale(1,-1)">FK</text>
+			<text x="1502" y="345" style="font-family: Arial; font-size: 12px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,690) scale(1,-1)">RegisteredAt : datetime</text>
+			<text x="20" y="1140" style="font-family: ArialB; font-size: 25px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2280) scale(1,-1)">RECRIAR - EER obtido por engenharia reversa | 11 tabelas</text>
+			<text x="20" y="1103" style="font-family: Arial; font-size: 16px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,2206) scale(1,-1)">Estrutura lida do MySQL de teste por SHOW CREATE TABLE após executar o script desta entrega.</text>
+			<text x="20" y="80" style="font-family: Arial; font-size: 15px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,160) scale(1,-1)">PK: chave primária | FK: chave estrangeira | AI: AUTO_INCREMENT | UQ: UNIQUE | NULL: campo opcional</text>
+			<text x="20" y="53" style="font-family: Arial; font-size: 13px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,106) scale(1,-1)">SessionEnrollments: UNIQUE(SessionId, ChildId). RelationshipTypes.Id: valor fixo; Outro = 9. ActivityLogs não tem FK para Children.</text>
+			<text x="20" y="26" style="font-family: Arial; font-size: 13px;fill: rgb(8%,21%,28%); stroke:none;" transform="translate(0,52) scale(1,-1)">Exclusões: CASCADE nos dependentes da ficha; RESTRICT nas demais FKs. Idades são validadas no serviço C#.</text>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,1 @@
+Server=localhost;Port=3306;Database=recriar_prod;User ID=SEU_USUARIO;Password=SUA_SENHA;
